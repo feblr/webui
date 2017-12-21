@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+@function component($block, $modifier, $theme: "") {
+  $theme-prefix: '';
+  $modifier-postfix: '';
+
+  @if ($theme != "") {
+    $theme-prefix: $theme + '__';
+  }
+
+  @if ($modifier != "default") {
+    $modifier-postfix: '--' + $modifier;
+  }
+
+  @return $theme-prefix + $block + $modifier-postfix;
+}

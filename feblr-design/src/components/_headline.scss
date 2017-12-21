@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+/**
+ * 标题
+ * @name 标题
+ * @arg {number.48px} $headline-1-font-size 1级标题字体大小
+ * @arg {number.36px} $headline-2-font-size 2级标题字体大小
+ * @arg {number.24px} $headline-3-font-size 3级标题字体大小
+ * @arg {number.20px} $headline-4-font-size 4级标题字体大小
+ * @arg {number.16px} $headline-5-font-size 5级标题字体大小
+ * @arg {number.14px} $headline-6-font-size 6级标题字体大小
+ * @example {html} headline
+ *  <h1>Headline 1</h1>
+ *  <h2>Headline 2</h2>
+ *  <h3>Headline 3</h3>
+ *  <h4>Headline 4</h4>
+ *  <h5>Headline 5</h5>
+ *  <h6>Headline 6</h6>
+ */
+
+$headline-1-font-size: 48px !default;
+$headline-2-font-size: 36px !default;
+$headline-3-font-size: 24px !default;
+$headline-4-font-size: 20px !default;
+$headline-5-font-size: 16px !default;
+$headline-6-font-size: 14px !default;
+
+h1, .headline--1 {
+  font-size: $headline-1-font-size;
+}
+
+h2, .headline--2 {
+  font-size: $headline-2-font-size;
+}
+
+h3, .headline--3 {
+  font-size: $headline-3-font-size;
+}
+
+h4, .headline--4 {
+  font-size: $headline-4-font-size;
+}
+
+h5, .headline--5 {
+  font-size: $headline-5-font-size;
+}
+
+h6, .headline--6 {
+  font-size: $headline-6-font-size;
+}

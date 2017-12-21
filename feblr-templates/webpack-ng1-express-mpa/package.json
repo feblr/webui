@@ -1,0 +1,56 @@
+{
+  "name": "{{ prompt.name }}",
+  "version": "0.0.1",
+  "description": "{{ prompt.description }}",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node ./bin/www",
+    "local": "NODE_ENV=development node ./bin/www",
+    "build": "webpack --config bundle/webpack.config.js",
+    "dev": "webpack-dev-server --config bundle/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "{{ prompt.git }}"
+  },
+  "keywords": [
+    "template",
+    "webpack",
+    "angular1.x",
+    "express"
+  ],
+  "author": "Jacob Chang",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-ui-router": "^0.3.1",
+    "autoprefixer": "^6.3.6",
+    "body-parser": "~1.13.2",
+    "bunyan": "^1.8.1",
+    "cookie-parser": "~1.3.5",
+    "copy-webpack-plugin": "^2.1.6",
+    "css-loader": "^0.23.1",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "express-http-proxy": "^0.7.2",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "glob": "^7.0.4",
+    "html-loader": "^0.4.3",
+    "html-webpack-plugin": "^2.21.0",
+    "jade": "~1.11.0",
+    "jade-loader": "^0.8.0",
+    "jsencrypt": "^2.3.0",
+    "morgan": "~1.6.1",
+    "nunjucks": "^2.4.2",
+    "optimist": "^0.6.1",
+    "postcss-loader": "^0.9.1",
+    "precss": "^1.4.0",
+    "serve-favicon": "~2.3.0",
+    "style-loader": "^0.13.1",
+    "toml": "^2.3.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-merge": "^0.12.0",
+    "wechat": "^2.0.3"
+  }
+}

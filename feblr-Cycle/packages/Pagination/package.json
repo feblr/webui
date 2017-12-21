@@ -1,0 +1,31 @@
+{
+  "name": "feblr-cycle-pagination",
+  "version": "0.0.1",
+  "description": "pagination for cycle.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "build": "tsc -w ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacobChang/feblr-web.git"
+  },
+  "keywords": [
+    "cycle.js",
+    "pagination"
+  ],
+  "author": "Jacob Chang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JacobChang/feblr-web/issues"
+  },
+  "homepage": "https://github.com/JacobChang/feblr-web#readme",
+  "devDependencies": {
+    "typescript": "^2.1.4"
+  },
+  "dependencies": {
+    "@cycle/dom": "^14.2.0",
+    "xstream": "^9.0.0"
+  }
+}

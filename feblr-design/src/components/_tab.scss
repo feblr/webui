@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+/**
+ * 标签
+ * @name 标签
+ * @component {string} tab 组件名
+ * @modifier {string} default 类别修饰
+ * @arg {number.42px} item-height 标签项高度
+ * @arg {number.42px} item-horizontal-padding 标签项水平方向填充距离
+ * @arg {number.14px} item-normal-font-size 标签项正常字体大小
+ * @arg {color.#666666} item-normal-color 标签项正常字体颜色
+ * @arg {color.#666666} item-normal-border-color 标签项正常底部边框颜色
+ * @arg {number.14px} item-hover-font-size 标签项悬停字体大小
+ * @arg {color.#00bc8d} item-hover-color 标签项悬停时字体颜色
+ * @arg {color.#00bc8d} item-hover-border-color 标签项悬停底部边框颜色
+ * @arg {number.14px} item-active-font-size 标签项激活字体大小
+ * @arg {color.#00bc8d} item-active-color 标签项字体激活时颜色
+ * @arg {color.#00bc8d} item-active-border-color 标签项激活底部边框颜色
+ * @example {html} tab
+ *  <div class="tab">
+ *    <ul class="tab__header">
+ *      <li class="tab__item tab__item--active">Tab 1</li>
+ *      <li class="tab__item">Tab 2</li>
+ *      <li class="tab__item">Tab 3</li>
+ *    </ul>
+ *    <div class="tab__content">
+ *      <div class="tab__pane tab__pane--active"><h2>Tab Pane 1</h2></div>
+ *      <div class="tab__pane"><h2>Tab Pane 2</h2></div>
+ *      <div class="tab__pane"><h2>Tab Pane 3</h2></div>
+ *    </div>
+ *  </div>
+ * @usage {scss} tab
+ *  tab(+config, +modifier, +theme)
+ */
+
+$tab-defaults: (
+  item-height: 42px,
+  item-horizontal-padding: 8px,
+  item-normal-font-size: 14px,
+  item-normal-color: #666666,
+  item-normal-border-color: #666666,
+  item-hover-font-size: 14px,
+  item-hover-color: #00bc8d,
+  item-hover-border-color: #00bc8d,
+  item-active-font-size: 14px,
+  item-active-color: #00bc8d,
+  item-active-border-color: #00bc8d,
+);
+
+@mixin tab($customization: $tab-defaults, $modifier: default, $theme: "") {
+  $config: map-merge($map1: $tab-defaults, $map2: $customization);
+  $tab-name: component('tab', $modifier, $theme);
+
+  .#{$tab-name} {
+    &__header, &__content {
+      margin: 0;
+      padding: 0;
+    }
+
+    &__item {
+      display: inline-block;
+      padding: 0 map-get($config, item-horizontal-padding);
+      border-width: 1px;
+      border-style: solid;
+      border-color: transparent transparent map-get($config, item-normal-border-color) transparent;
+
+      color: map-get($config, item-normal-color);
+      font-size: map-get($config, item-normal-font-size);
+      line-height: map-get($config, item-height);
+
+      cursor: pointer;
+
+      vertical-align: bottom;
+
+      height: map-get($config, item-height);
+
+      &:hover {
+        border-color: transparent transparent map-get($config, item-hover-border-color) transparent;
+
+        color: map-get($config, item-hover-color);
+        font-size: map-get($config, item-hover-font-size);
+      }
+
+      &--active {
+        border-color: transparent transparent map-get($config, item-active-border-color) transparent;
+
+        color: map-get($config, item-active-color);
+        font-size: map-get($config, item-active-font-size);
+      }
+    }
+
+    &__pane {
+      display: none;
+
+      &--active {
+        display: block;
+      }
+    }
+  }
+}

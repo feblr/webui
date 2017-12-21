@@ -1,0 +1,75 @@
+exports[`test Pagination structure 1`] = `
+<div
+  className="feblr-pagination">
+  <ul>
+    <li
+      className="prev">
+      <button
+        onClick={[Function]}
+        type="button">
+        <i
+          className="feblr-icon-arrow-left icon" />
+      </button>
+    </li>
+    <li
+      className="page">
+      <button
+        onClick={[Function]}
+        type="button">
+        1
+      </button>
+    </li>
+    <li
+      className="page">
+      <button
+        onClick={[Function]}
+        type="button">
+        2
+      </button>
+    </li>
+    <li
+      className="page">
+      <button
+        onClick={[Function]}
+        type="button">
+        3
+      </button>
+    </li>
+    <li
+      className="page">
+      <button
+        onClick={[Function]}
+        type="button">
+        4
+      </button>
+    </li>
+    <li
+      className="page">
+      <button
+        onClick={[Function]}
+        type="button">
+        5
+      </button>
+    </li>
+    <li
+      className="next">
+      <button
+        onClick={[Function]}
+        type="button">
+        <i
+          className="feblr-icon-arrow-right icon" />
+      </button>
+    </li>
+  </ul>
+  <div
+    className="jumper">
+    <form
+      onSubmit={[Function]}>
+      <input
+        onChange={[Function]}
+        type="number"
+        value={1} />
+    </form>
+  </div>
+</div>
+`;

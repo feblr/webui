@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+/**
+ * 表单
+ * @name 表单
+ * @component {string} form 组件名
+ * @modifier {string} default 类别修饰
+ * @arg {number.14px} field-margin 表单项间距
+ * @arg {number.18px} label-height 表单标签高度
+ * @arg {number.12px} label-font-size 表单标签文字大小
+ * @arg {color.#999999} label-color 表单标签文字颜色
+ * @arg {number.44px} control-height 表单输入框高度
+ * @arg {number.4px} control-border-radius 表单输入框圆角
+ * @arg {number.14px} control-font-size 表单输入框文字大小
+ * @arg {color.#333333} control-normal-color 表单输入框正常态文字颜色
+ * @arg {color.#333333} control-normal-border-color 表单输入框正常态边框颜色
+ * @arg {color.white} control-normal-background-color 表单输入框正常态背景颜色
+ * @arg {color.$primary-color} control-focus-color 表单输入框选中态文字颜色
+ * @arg {color.$primary-color} control-focus-border-color 表单输入框选中态边框颜色
+ * @arg {color.#666666} control-focus-background-color 表单输入框选中态背景颜色
+ * @arg {color.$contrast-color} control-error-color 表单输入框错误态文字颜色
+ * @arg {color.$contrast-color} control-error-border-color 表单输入框错误态边框颜色
+ * @arg {color.#999999} control-error-background-color 表单输入框错误态背景颜色
+ * @arg {color.#999999} control-disabled-color 表单输入框禁用态文字颜色
+ * @arg {color.#999999} control-disabled-border-color 表单输入框禁用态边框颜色
+ * @arg {color.#cccccc} control-disabled-background-color 表单输入框禁用态背景颜色
+ * @arg {number.14px} control__addon-size 表单输入框标签大小
+ * @example {html} form
+ *  <form>
+ *    <div class="form__field">
+ *      <label class="form__label">form label</label>
+ *      <input class="form__control form__control--error form__control--addon-pre" placeholder="Form control"/>
+ *      <span class="form__control__addon form__control__addon--pre">A</span>
+ *    </div>
+ *    <div class="form__field">
+ *      <label class="form__label">form label</label>
+ *      <input class="form__control form__control--addon-post" placeholder="Form control"/>
+ *      <span class="form__control__addon form__control__addon--post">A</span>
+ *    </div>
+ *    <div class="form__field">
+ *      <label class="form__label">form label</label>
+ *      <input class="form__control" disabled="disabled" placeholder="Form control"/>
+ *    </div>
+ *  </form>
+ * @usage {scss} form
+ *  form(+config, +modifier, +theme)
+ */
+
+$form-defaults: (
+  field-margin: 14px,
+  label-height: 18px,
+  label-color: #999999,
+  label-font-size: 12px,
+  control-height: 44px,
+  control-border-radius: 4px,
+  control-font-size: 14px,
+  control-normal-color: #333333,
+  control-normal-border-color: #333333,
+  control-normal-background-color: white,
+  control-focus-color: $primary-color,
+  control-focus-border-color: $primary-color,
+  control-focus-background-color: #666666,
+  control-error-color: $contrast-color,
+  control-error-border-color: $contrast-color,
+  control-error-background-color: #999999,
+  control-disabled-color: #999999,
+  control-disabled-border-color: #cccccc,
+  control-disabled-background-color: #cccccc,
+  control__addon-size: 14px,
+);
+
+@mixin form($customization: $form-defaults, $modifier: default, $theme: "") {
+  $config: map-merge($map1: $form-defaults, $map2: $customization);
+  $form-name: component('form', $modifier, $theme);
+
+  .#{$form-name} {
+    &__field {
+      position: relative;
+      margin: map-get($config, field-margin) 0;
+    }
+
+    &__label {
+      display: inline-block;
+
+      height: map-get($config, label-height);
+
+      color: map-get($config, label-color);
+      font-size: map-get($config, label-font-size);
+    }
+
+    &__control {
+      display: inline-block;
+      margin: 0;
+      padding: 0 map-get($config, control-font-size);
+      border: 1px solid map-get($config, control-normal-border-color);
+
+      width: 100%;
+      height: map-get($config, control-height);
+
+      color: map-get($config, control-normal-color);
+      font-size: map-get($config, control-font-size);
+      line-height: map-get($config, control-height);
+
+      border-radius: map-get($config, control-border-radius);
+
+      background-color: map-get($config, control-normal-background-color);
+
+      &:focus {
+        border-color: map-get($config, control-focus-border-color);
+
+        color: map-get($config, control-focus-color);
+
+        background-color: map-get($config, control-focus-background-color);
+      }
+
+      &:disabled {
+        border-color: map-get($config, control-disabled-border-color);
+
+        color: map-get($config, control-disabled-color);
+
+        background-color: map-get($config, control-disabled-background-color);
+      }
+
+      &--error {
+        border-color: map-get($config, control-error-border-color);
+
+        color: map-get($config, control-error-color);
+
+        background-color: map-get($config, control-error-background-color);
+      }
+
+      &--addon-pre {
+        padding-left: (map-get($config, control-font-size) * 2 + map-get($config, control__addon-size));
+      }
+
+      &--addon-post {
+        padding-right: (map-get($config, control-font-size) * 2 + map-get($config, control__addon-size));
+      }
+    }
+
+    &__control__addon {
+      position: absolute;
+      bottom: (map-get($config, control-height) - map-get($config, control__addon-size)) / 2;
+
+      &--pre {
+        left: (map-get($config, control-height) - map-get($config, control__addon-size)) / 2;
+      }
+
+      &--post {
+        right: (map-get($config, control-height) - map-get($config, control__addon-size)) / 2;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+/**
+ * 百分比转换
+ * @name 百分比转换
+ * @example {scss} percent .demo {
+ *                           width: percent(50, 100);
+ *                         }
+ */
+
+@function percent( $target, $context ) {
+	@return $target / $context * 100%;
+}

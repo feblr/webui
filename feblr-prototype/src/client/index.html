@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Feblr Prototype</title>
+  <link href="/styles/devices.min.css" rel="stylesheet" />
+  <link href="/styles/main.css" rel="stylesheet" />
+</head>
+
+<body>
+  <main>
+    <aside id="operations">
+      <button id="save-btn">Save</button>
+      <p>Components</p>
+      <div id="components"></div>
+    </aside>
+    <section id="simulator">
+      <div class="marvel-device iphone6 black">
+        <div class="top-bar"></div>
+        <div class="sleep"></div>
+        <div class="volume"></div>
+        <div class="camera"></div>
+        <div class="sensor"></div>
+        <div class="speaker"></div>
+        <div class="screen">
+          <iframe id="preview"></iframe>
+        </div>
+        <div class="home"></div>
+        <div class="bottom-bar"></div>
+      </div>
+    </section>
+    <aside id="properties"></aside>
+  </main>
+
+  <div class="backdrop" id="result-dialog">
+    <div class="dialog">
+      <div class="dialog-body">
+        <p>
+        <a href="/temporay/demo.html" about="_blank">Go</a>
+        </p>
+        <button id="close-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/vendors/rxjs/bundles/Rx.min.js"></script>
+  <script src="/scripts/pages/main.js"></script>
+</body>
+
+</html>

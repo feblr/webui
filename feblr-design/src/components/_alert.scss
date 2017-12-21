@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+/**
+ * 通知
+ * @name 通知
+ * @klass {string} alert 组件名
+ * @modifier {string} default 类别修饰
+ * @arg {number.14px} font-size 通知文字大小
+ * @arg {number.44px} height 通知高度
+ * @arg {color.#3c763d} success-text-color 成功通知文字颜色
+ * @arg {color.#d6e9c6} success-border-color 成功通知边框颜色
+ * @arg {color.#dff0d8} success-background-color 成功通知背景颜色
+ * @arg {color.#31708f} info-text-color 普通通知文字颜色
+ * @arg {color.#bce8f1} info-border-color 普通通知边框颜色
+ * @arg {color.#d9edf7} info-background-color 普通通知背景颜色
+ * @arg {color.#8a6d3b} warning-text-color 警告通知文字颜色
+ * @arg {color.#faebcc} warning-border-color 警告通知边框颜色
+ * @arg {color.#fcf8e3} warning-background-color 警告通知背景颜色
+ * @arg {color.#a94442} danger-text-color 错误通知文字颜色
+ * @arg {color.#ebccd1} danger-border-color 错误通知边框颜色
+ * @arg {color.#f2dede} danger-background-color 错误通知背景颜色
+ * @example {html} $alert-success <div class="alert alert--success">Success</div>
+ * @example {html} $alert-info <div class="alert alert--info">Information</div>
+ * @example {html} $alert-warning <div class="alert alert--warning">Warning</div>
+ * @example {html} $alert-danger <div class="alert alert--danger">Danger</div>
+ * @usage {scss} badge
+ *  alert(+config, +modifier, +theme)
+ */
+
+@import '../functions/component';
+
+$alert-defaults: (
+  font-size: 14px,
+  height: 44px,
+  success-text-color: #3c763d,
+  success-border-color: #d6e9c6,
+  success-background-color: #dff0d8,
+  info-text-color: #31708f,
+  info-border-color: #bce8f1,
+  info-background-color: #d9edf7,
+  warning-text-color: #8a6d3b,
+  warning-border-color: #faebcc,
+  warning-background-color: #fcf8e3,
+  danger-text-color: #a94442,
+  danger-border-color: #ebccd1,
+  danger-background-color: #f2dede,
+);
+
+@mixin alert($customization: $alert-defaults, $modifier: default, $theme: "") {
+  $config: map-merge($map1: $alert-defaults, $map2: $customization);
+  $alert-name: component('alert', $modifier, $theme);
+
+  .#{$alert-name} {
+    padding: (map-get($config, height) - map-get($config, font-size)) / 2;
+    border-width: 1px;
+    border-style: solid;
+
+    font-size: map-get($config, font-size);
+
+    word-break: break-all;
+
+    @each $modifier in success, info, warning, danger {
+      &--#{$modifier} {
+        border-color: map-get($config, $modifier + '-border-color');
+        color: map-get($config, $modifier + '-text-color');
+        background-color: map-get($config, $modifier + '-background-color');
+      }
+    }
+  }
+}

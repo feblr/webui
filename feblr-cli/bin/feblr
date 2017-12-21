@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const commander = require('commander');
+
+const customizeCommands = {
+  generate: {
+    cmd: 'create',
+    descripton: 'create a new resource from a template'
+  },
+  template: {
+    cmd: 'show',
+    descripton: 'show official templates'
+  }
+};
+
+commander
+  .version(require('../package.json').version);
+
+Object.keys(customizeCommands).forEach(function(commandName) {
+  let command = customizeCommands[commandName];
+  commander.command(command.cmd, command.descripton);
+});
+
+commander.parse(process.argv);

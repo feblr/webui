@@ -1,0 +1,30 @@
+{
+  "name": "feblr-cli",
+  "version": "0.0.1",
+  "description": "commandline tools of feblr",
+  "main": "index.js",
+  "bin": {
+    "feblr": "bin/feblr"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run test"
+  },
+  "keywords": [
+    "commandline",
+    "tools"
+  ],
+  "author": "Jacob Chang",
+  "license": "ISC",
+  "dependencies": {
+    "feblr-templates": "^0.0.1",
+    "async": "^2.0.1",
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0",
+    "consolidate": "^0.14.1",
+    "cross-spawn": "^4.0.0",
+    "inquirer": "^1.1.2",
+    "metalsmith": "^2.1.0",
+    "mustache": "^2.2.1"
+  }
+}

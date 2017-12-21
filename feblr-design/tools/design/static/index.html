@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Feblr-Design</title>
+	<script src="/sass/sass.js"></script>
+	<script src="/angular/angular.min.js"></script>
+	<script src="/app.js"></script>
+	<link rel="stylesheet" href="/style.css" />
+</head>
+
+<body ng-controller="MainCtrl as ctrl" style="margin: 0; padding: 4rem 0;">
+	<header class="feblr-header">
+		<button class="feblr-button" ng-click="ctrl.openDialog(ctrl.dialog)">保存自定义配置</button>
+	</header>
+	<aside class="feblr-aside">
+		<h2 class="feblr-aside-title">主题</h2>
+		<ul class="feblr-ul">
+			<li class="feblr-li" ng-repeat="file in ctrl.themes" ng-class="{active: file == ctrl.current}" ng-click="ctrl.selectFile(file)">
+				<p class="feblr-file-name" ng-bind="file.name"></p>
+			</li>
+		</ul>
+		<h2 class="feblr-aside-title">组件</h2>
+		<ul class="feblr-ul">
+			<li class="feblr-li" ng-repeat="file in ctrl.files" ng-class="{active: file == ctrl.current}" ng-click="ctrl.selectFile(file)">
+				<p class="feblr-file-name" ng-bind="file.name"></p>
+			</li>
+		</ul>
+	</aside><!--
+	--><main class="feblr-main">
+		<div class="feblr-components" ng-repeat="file in ctrl.themes" ng-class="{active: file == ctrl.current}">
+			<div ng-repeat="component in file.components">
+				<h2 class="feblr-component-name" ng-bind="component.name"></h2>
+				<div class="feblr-args">
+					<p class="feblr-section-title">自定义</p>
+					<table class="feblr-table">
+						<thead>
+							<tr>
+								<td class="feblr-td">配置项</td>
+								<td class="feblr-td">说明</td>
+								<td class="feblr-td">类型</td>
+								<td class="feblr-td">值</td>
+							</tr>
+						</thead>
+						<tr ng-repeat="arg in component.args">
+							<td class="feblr-td" ng-bind="arg.name"></td>
+							<td class="feblr-td" ng-bind="arg.description"></td>
+							<td class="feblr-td" ng-bind="arg.config.type"></td>
+							<td class="feblr-td">
+								<div ng-switch on="arg.config.type">
+									<div ng-switch-when="number">
+										<input type="text" ng-change="ctrl.compileStyle(ctrl.themes, ctrl.files)" ng-model="arg.config.value"/><label ng-bind="arg.config.unit"></label><button ng-click="ctrl.restoreArg(ctrl.themes, ctrl.files, arg)">使用默认值</button>
+									</div>
+									<div ng-switch-default="">
+										<input type="text" ng-change="ctrl.compileStyle(ctrl.themes, ctrl.files)" ng-model="arg.config.value"/><label ng-bind="arg.config.unit"></label><button ng-click="ctrl.restoreArg(ctrl.themes, ctrl.files, arg)">使用默认值</button>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="feblr-components" ng-repeat="file in ctrl.files" ng-class="{active: file == ctrl.current}">
+			<div ng-repeat="component in file.components">
+				<h2 class="feblr-component-name" ng-bind="component.name"></h2>
+				<div class="feblr-examples">
+					<p class="feblr-section-title">示例</p>
+					<div class="feblr-example" ng-repeat="example in component.examples">
+						<div class="feblr-content">
+							<p ng-bind-html="example.description | trustAsHtml"></p>
+							<p class="feblr-source-title">对应代码</p>
+							<p class="feblr-source" ng-bind="example.description"></p>
+						</div>
+					</div>
+				</div>
+				<div class="feblr-args">
+					<p class="feblr-section-title">自定义</p>
+					<table class="feblr-table">
+						<thead>
+							<tr>
+								<td class="feblr-td">配置项</td>
+								<td class="feblr-td">说明</td>
+								<td class="feblr-td">类型</td>
+								<td class="feblr-td">值</td>
+							</tr>
+						</thead>
+						<tr ng-repeat="arg in component.args">
+							<td class="feblr-td" ng-bind="arg.name"></td>
+							<td class="feblr-td" ng-bind="arg.description"></td>
+							<td class="feblr-td" ng-bind="arg.config.type"></td>
+							<td class="feblr-td">
+								<div ng-switch on="arg.config.type">
+									<div ng-switch-when="number">
+										<input type="text" ng-change="ctrl.compileStyle(ctrl.themes, ctrl.files)" ng-model="arg.config.value"/><label ng-bind="arg.config.unit"></label><button ng-click="ctrl.restoreArg(ctrl.themes, ctrl.files, arg)">使用默认值</button>
+									</div>
+									<div ng-switch-default="">
+										<input type="text" ng-change="ctrl.compileStyle(ctrl.themes, ctrl.files)" ng-model="arg.config.value"/><label ng-bind="arg.config.unit"></label><button ng-click="ctrl.restoreArg(ctrl.themes, ctrl.files, arg)">使用默认值</button>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<div class="feblr-dialog" ng-class="{show: ctrl.dialog.show}" ng-click="ctrl.closeDialog(ctrl.dialog, $event)">
+		<div ng-switch on="ctrl.dialog.state" class="feblr-dialog-body">
+			<div ng-switch-when="CONFIG">
+				<form class="feblr-form" ng-submit="ctrl.generate(ctrl.themes, ctrl.files, ctrl.dialog)">
+					<div class="feblr-form-field">
+						<label class="feblr-dialog-label">主题前缀<small>附加到各个css类名前，默认为空</small></label>
+            <input class="feblr-dialog-input" ng-model="ctrl.dialog.form.prefix" />
+					</div>
+					<div class="feblr-form-submit">
+						<button class="feblr-button" type="submit">生成</button>
+					</div>
+				</form>
+			</div>
+			<div ng-switch-when="COMPILING">
+        <p>正在编译</p>
+			</div>
+			<div ng-switch-when="DOWNLOAD">
+        <a ng-href="{{ ctrl.dialog.styles.css.href }}" download="main.css">下载CSS文件</a>
+        <a ng-href="{{ ctrl.dialog.styles.scss.href }}" download="main.scss">下载SCSS文件</a>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+/**
+ * 折叠面板
+ *
+ * @name 折叠面板
+ * @klass {string} accordion 组件名
+ * @modifier {string} default 类别修饰
+ * @arg {number.1px} border-width 折叠面板边框宽度
+ * @arg {color.#e4e4e4} border-color 折叠面板边框颜色
+ * @arg {number.4px} border-radius 折叠面板圆角大小
+ * @arg {number.4px} box-shadow-size 折叠面板阴影大小
+ * @arg {color.#e4e4e4} box-shadow-color 折叠面板阴影颜色
+ * @arg {number.14px} shrink-padding-size 带内边距的折叠面板内据大小
+ * @arg {number.12px} header-icon-size 折叠面板头部图标大小
+ * @arg {color.black} header-icon-color 折叠面板头部图标颜色
+ * @example {html} accordion
+ *  <div class="accordion">
+ *    <div class="accordion__header">
+ *      <p>Accordion Header</p>
+ *      <span class="accordion__header__icon"></span>
+ *    </div>
+ *    <div class="accordion__main">
+ *      <p>Accordion Main</p>
+ *    </div>
+ *  </div>
+ * @example {html} accordion
+ *  <div class="accordion accordion--shrink">
+ *    <div class="accordion__header accordion__header--unfold accordion__header--shrink">
+ *      <p>Accordion Header</p>
+ *      <span class="accordion__header__icon"></span>
+ *    </div>
+ *    <div class="accordion__main accordion__main--unfold accordion__main--shrink">
+ *      <p>Accordion Main</p>
+ *    </div>
+ *  </div>
+ * @usage {scss} accordion
+ *  accordion(+config, +modifier, +theme)
+ */
+
+@import '../functions/component';
+@import '../mixins/triangle';
+
+$accordion-defaults: (
+  border-width: 1px,
+  border-color: #e4e4e4,
+  border-radius: 4px,
+  box-shadow-size: 4px,
+  box-shadow-color: #e4e4e4,
+  shrink-padding-size: 14px,
+  header-icon-size: 12px,
+  header-icon-color: black
+);
+
+@mixin accordion($customization: $accordion-defaults, $modifier: default, $theme: "") {
+  $config: map-merge($map1: $accordion-defaults, $map2: $customization);
+  $accordion-name: component('accordion', $modifier, $theme);
+
+  .#{$accordion-name} {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: map-get($config, border-width) solid map-get($config, border-color);
+
+    border-radius: map-get($config, border-radius);
+
+    box-shadow: 0 0 map-get($config, box-shadow-size) map-get($config, box-shadow-color);
+
+    &--shrink {
+      padding: 0 map-get($config, shrink-padding-size);
+    }
+
+    &__header {
+      position: relative;
+      display: block;
+      padding: 0 map-get($config, shrink-padding-size);
+
+      &--unfold {
+        .#{$accordion-name}__header__icon {
+          @include triangle(map-get($config, header-icon-size), map-get($config, header-icon-size), map-get($config, header-icon-color), down);
+        }
+      }
+
+      &--shrink {
+        padding: 0;
+        margin: 0 map-get($config, shrink-padding-size);
+      }
+
+      &__icon {
+        position: absolute;
+        top: map-get($config, header-icon-size) / 2;
+        right: map-get($config, header-icon-size);
+
+        @include triangle(map-get($config, header-icon-size), map-get($config, header-icon-size), map-get($config, header-icon-color), right);
+      }
+    }
+
+    &__main {
+      display: none;
+      padding: 0 map-get($config, shrink-padding-size);
+      border-top: map-get($config, border-width) solid map-get($config, border-color);
+
+      &--unfold {
+        display: block;
+      }
+
+      &--shrink {
+        padding: 0;
+        margin: 0 map-get($config, shrink-padding-size);
+      }
+    }
+  }
+}

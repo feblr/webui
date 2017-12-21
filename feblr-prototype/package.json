@@ -1,0 +1,17 @@
+{
+  "name": "feblr-prototype",
+  "version": "1.0.0",
+  "description": "prototype builder for simple pages",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacob Chang",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "live-server": "^1.2.0",
+    "rxjs": "^5.2.0"
+  }
+}

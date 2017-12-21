@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+/**
+ * 漂带
+ * @name 漂带
+ * @arg {color} $background 背景色
+ * @arg {color} $color 文字颜色
+ * @arg {number} $font-size 文字大小
+ * @arg {direction} $direction 方向 
+ * @example {scss} caret .demo { @include ribbon(8px, 8px, red, up); }
+ *
+ */
+
+@mixin ribbon($background, $color, $font-size, $direction) {
+  position: relative;
+  display: inline-block;
+  padding: 16px;
+  color: $color;
+  font-size: $font-size;
+  line-height: 1;
+  vertical-align: middle;
+  background: $background;
+
+  &:before,
+  & .before {
+    content: '';
+    position: absolute;
+    height: 0;
+    width: 0;
+    border-style: solid;
+  }
+
+  @if ($direction == top) {
+    width: $font-size / 2;
+    word-wrap: break-word;
+    word-break: break-all;
+
+    &:before,
+    & .before {
+      border-color: #fff transparent transparent transparent;
+      left: 0;
+      top: 0;
+      border-width: 9px ($font-size / 2 + 32) / 2;
+    }
+  } @else if $direction == right {
+    height: $font-size;
+
+    &:before,
+    & .before {
+      border-color: transparent #fff transparent transparent;
+      border-width: ($font-size + 32) / 2 9px;
+      right: 0;
+      top: 0;
+    }
+  } @else if($direction == bottom) {
+    width: $font-size / 2;
+    word-wrap: break-word;
+    word-break: break-all;
+
+    &:before,
+    & .before {
+      border-color: transparent transparent #fff transparent;
+      left: 0;
+      bottom: 0;
+      border-width: 9px ($font-size / 2 + 32) / 2;
+    }
+  } @else if $direction == left {
+    height: $font-size;
+
+    &:before,
+    & .before {
+      border-width: ($font-size + 32) / 2 9px;
+      border-color: transparent transparent transparent #fff;
+      left: 0;
+      top: 0;
+    }
+  } @else {
+    @error "ribbon direction must be top, right, bottom or left, but you provide #{$direction}";
+  }
+}

@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const template = require('../lib/template');
+
+let templates = template.getTemplates();
+templates.forEach(template => {
+  console.log('\n');
+
+  console.log('template:     ' + template.name);
+  console.log('description:  ' + template.description);
+});
+
+console.log('\n');

@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+@mixin screen($minWidth, $maxWidth) {
+  @media screen and (min-width: $minWidth) and (max-width: $maxWidth) {
+    @content;
+  }
+}
+
+@mixin max-screen($maxWidth) {
+  @media screen and (max-width: $maxWidth) {
+    @content;
+  }
+}
+
+@mixin min-screen($minWidth) {
+  @media screen and (min-width: $minWidth) {
+    @content;
+  }
+}

@@ -1,0 +1,65 @@
+@charset "UTF-8";
+/**
+ * 面包屑导航
+ * @name 面包屑导航
+ * @klass {string} breadcrumb 组件名
+ * @modifier {string} default 类别修饰
+ * @arg {number.14px} font-size 面包屑导航文字大小
+ * @arg {number.#4a4a4a} curr-text-color 面包屑导航当前项文字颜色
+ * @arg {number.#00bc8d} past-text-color 面包屑导航过往项文字颜色
+ * @arg {number.'\003E'} seperator-content 面包屑导航分割符内容
+ * @arg {number.#4a4a4a} seperator-color 面包屑导航分割符颜色
+ * @example {html} breadcrumb
+ *  <ol class="breadcrumb"><li class="breadcrumb__item breadcrumb__item--past">childhood</li><li class="breadcrumb__item breadcrumb__item--past">youth</li><li class="breadcrumb__item breadcrumb__item--past">twilight</li><li class="breadcrumb__item breadcrumb__item--curr">Now</li></ol>
+ * @usage {scss} breadcrumb
+ *  breadcrumb(+config, +modifier, +theme)
+ */
+
+@import '../functions/component';
+
+$breadcrumb-defaults: (
+  font-size: 14px,
+  seperator-content: '\003E',
+  seperator-color: #4a4a4a,
+  curr-text-color: #4a4a4a,
+  past-text-color: #00bc8d,
+);
+
+@mixin breadcrumb($customization: $breadcrumb-defaults, $modifier: default, $theme: "") {
+  $config: map-merge($map1: $breadcrumb-defaults, $map2: $customization);
+  $breadcrumb-name: component('breadcrumb', $modifier, $theme);
+
+  .#{$breadcrumb-name} {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+    &__item {
+      display: inline-block;
+
+      font-size: map-get($config, font-size);
+
+      &::before {
+        padding: 0 (map-get($config, font-size) / 2);
+
+        color: map-get($config, seperator-color);
+        content: '#{map-get($config, seperator-content)}';
+      }
+
+      &:first-child {
+        &::before {
+          padding: 0;
+
+          content: '';
+        }
+      }
+
+      @each $modifier in curr, past {
+        &--#{$modifier} {
+          color: map-get($config, $modifier + '-text-color');
+        }
+      }
+    }
+  }
+}

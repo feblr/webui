@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+/**
+ * 按钮
+ *
+ * @name 按钮
+ * @component {string} button 组件名
+ * @modifier {string} default 类别修饰
+ * @arg {number.26px} small-height 小按钮高度
+ * @arg {number.12px} small-font-size 小按钮文字大小
+ * @arg {number.44px} normal-height 普通按钮高度
+ * @arg {number.14px} normal-font-size 普通按钮文字大小
+ * @arg {number.56px} large-height 大按钮高度
+ * @arg {number.20px} large-font-size 大按钮文字大小
+ * @arg {number.4px} border-radius 按钮圆角大小
+ * @arg {number.12px} horizontal-padding 按钮水平方向文字与边框间距大小
+ * @arg {color.white} primary-text-color 主题按钮文字颜色
+ * @arg {color.$primary-color} primary-background-color 主要按钮背景颜色
+ * @arg {color.white} primary-outline-background-color 主要线框按钮背景颜色
+ * @arg {color.white} contrast-text-color 对比按钮文字颜色
+ * @arg {color.$contrast-color} contrast-background-color 对比按钮背景颜色
+ * @arg {color.white} contrast-outline-background-color 对比线框按钮背景颜色
+ * @arg {color.white} secondary-text-color 次要按钮文字颜色
+ * @arg {color.$secondary-color} secondary-background-color 次要按钮背景颜色
+ * @arg {color.white} secondary-outline-background-color 次要线框按钮背景颜色
+ * @example {html} small <button class="button button--primary--solid button--small">Button</button>
+ * @example {html} normal <button class="button button--primary--solid button--normal">Button</button>
+ * @example {html} large <button class="button button--primary--solid button--large">Button</button>
+ * @example {html} small <button class="button button--contrast--solid button--small">Button</button>
+ * @example {html} normal <button class="button button--contrast--solid button--normal">Button</button>
+ * @example {html} large <button class="button button--contrast--solid button--large">Button</button>
+ * @example {html} small <button class="button button--secondary--solid button--small">Button</button>
+ * @example {html} normal <button class="button button--secondary--solid button--normal">Button</button>
+ * @example {html} large <button class="button button--secondary--solid button--large">Button</button>
+ * @example {html} small <button class="button button--primary--outline button--small">Button</button>
+ * @example {html} normal <button class="button button--primary--outline button--normal">Button</button>
+ * @example {html} large <button class="button button--primary--outline button--large">Button</button>
+ * @example {html} small <button class="button button--contrast--outline button--small">Button</button>
+ * @example {html} normal <button class="button button--contrast--outline button--normal">Button</button>
+ * @example {html} large <button class="button button--contrast--outline button--large">Button</button>
+ * @example {html} small <button class="button button--secondary--outline button--small">Button</button>
+ * @example {html} normal <button class="button button--secondary--outline button--normal">Button</button>
+ * @example {html} large <button class="button button--secondary--outline button--large">Button</button>
+ * @example {html} large <button class="button button--block button--primary--solid button--large">Button</button>
+ * @example {html} large <button class="button button--block button--primary--outline button--large">Button</button>
+ * @usage {scss} button
+ *  button(+config, +modifier, +theme)
+ */
+
+@import '../functions/component';
+
+$button-defaults: (
+  small-height: 26px,
+  small-font-size: 12px,
+  normal-height: 44px,
+  normal-font-size: 14px,
+  large-height: 56px,
+  large-font-size: 20px,
+  border-radius: 4px,
+  horizontal-padding: 10px,
+  primary-text-color: white,
+  primary-background-color: $primary-color,
+  primary-outline-background-color: white,
+  secondary-text-color: white,
+  secondary-background-color: $secondary-color,
+  secondary-outline-background-color: white,
+  contrast-text-color: white,
+  contrast-background-color: $contrast-color,
+  contrast-outline-background-color: white,
+);
+
+@mixin button-solid($text-color, $background-color) {
+  border-color: $background-color;
+
+  color: $text-color;
+
+  background: $background-color;
+
+  &:hover {
+    border-color: lighten($background-color, 5);
+    background: lighten($background-color, 5);
+  }
+
+  &:focus {
+    border-color: darken($background-color, 5);
+    background: darken($background-color, 5);
+  }
+}
+
+@mixin button-outline($outline-color, $background-color) {
+  border-color: $outline-color;
+
+  color: $outline-color;
+
+  background: $background-color;
+
+  &:hover {
+    border-color: lighten($outline-color, 5);
+
+    color: lighten($outline-color, 5);
+  }
+
+  &:focus {
+    border-color: darken($outline-color, 5);
+
+    color: darken($outline-color, 5);
+  }
+}
+
+@mixin button($customization: $button-defaults, $modifier: default, $theme: "") {
+  $config: map-merge($map1: $button-defaults, $map2: $customization);
+  $button-name: component('button', $modifier, $theme);
+
+  .#{$button-name} {
+    border-width: 1px;
+    border-style: solid;
+    padding: 0 map-get($config, horizontal-padding);
+
+    cursor: pointer;
+
+    border-radius: map-get($config, border-radius);
+
+    &--block {
+      width: 100%;
+    }
+
+    @each $modifier in small, normal, large {
+      &--#{$modifier} {
+        height: map-get($config, $modifier + '-height');
+        font-size: map-get($config, $modifier + '-font-size');
+      }
+    }
+
+    @each $modifier in primary, contrast, secondary {
+      &--#{$modifier}--solid {
+        @include button-solid(map-get($config, $modifier + '-text-color'), map-get($config, $modifier + '-background-color'))
+      }
+
+      &--#{$modifier}--outline {
+        @include button-outline(map-get($config, $modifier + '-background-color'), map-get($config, $modifier + '-outline-background-color'))
+      }
+    }
+  }
+}

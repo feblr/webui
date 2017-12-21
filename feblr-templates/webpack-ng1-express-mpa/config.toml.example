@@ -1,0 +1,15 @@
+project = "{{ prompt.name }}"
+
+[app]
+  host = "127.0.0.1"
+  port = 8080
+
+[apis]
+  [apis.production]
+  protocol = "https"
+  hostname = "{{ prompt.domain }}"
+  port = 443
+  [apis.development]
+  protocol = "http"
+  hostname = "{{ prompt.domain }}"
+  port = 80

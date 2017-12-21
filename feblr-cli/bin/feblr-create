@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const commander = require('commander');
+const chalk = require('chalk');
+const generate = require('../lib/generate');
+const template = require('../lib/template');
+
+commander
+  .usage('create resource --template template')
+  .option('-t, --template <template>', 'create a new resource with an official template');
+
+commander.on('--help', function () {
+  console.log('  Examples:')
+  console.log('\n')
+  console.log(chalk.gray('    # create a new project with a template'))
+  console.log('    $ feblr create demo --template webpack-ng1-express-mpa')
+  console.log('\n')
+});
+
+console.log('\n')
+process.on('exit', function () {
+  console.log('\n')
+});
+
+function run () {
+  commander.parse(process.argv);
+
+  if (!commander.template) {
+    return commander.help();
+  }
+
+  let templateDir = template.getTemplateDir(commander.template);
+  let destinationDir = path.join(process.cwd(), commander.args[0]);
+
+  generate(templateDir, destinationDir);
+}
+run();

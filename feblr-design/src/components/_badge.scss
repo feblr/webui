@@ -1,0 +1,58 @@
+@charset "UTF-8";
+/**
+ * 标记
+ * @name 标记
+ * @klass {string} badge 组件名
+ * @modifier {string} default 类别修饰
+ * @arg {number.12px} font-size 主标记字体大小
+ * @arg {number.4px} border-radius 主标记圆角大小
+ * @arg {color.#00BC8D} primary-text-color 主标记字体颜色
+ * @arg {color.#F0FCF9} primary-border-color 主标记边框颜色
+ * @arg {color.#F0FCF9} primary-background-color 主标记背景颜色
+ * @arg {color.#FFA90C} contrast-text-color 对比标记字体颜色
+ * @arg {color.#FFF7E7} contrast-border-color 对比标记边框颜色
+ * @arg {color.#FFF7E7} contrast-background-color 对比标记背景颜色
+ * @example {html} badge
+ *  <span class="badge badge--primary">badge</span>
+ * @example {html} badge
+ *  <span class="badge badge--contrast">badge</span>
+ * @usage {scss} badge
+ *  badge(+config, +modifier, +theme)
+ */
+
+@import '../functions/component';
+
+$badge-defaults: (
+  font-size: 12px,
+  border-radius: 4px,
+  primary-text-color: #00BC8D,
+  primary-border-color: #F0FCF9,
+  primary-background-color: #F0FCF9,
+  contrast-text-color: #FFA90C,
+  contrast-border-color: #FFF7E7,
+  contrast-background-color: #FFF7E7,
+);
+
+@mixin badge($customization: $badge-defaults, $modifier: default, $theme: "") {
+  $config: map-merge($map1: $badge-defaults, $map2: $customization);
+  $badge-name: component('badge', $modifier, $theme);
+
+  .#{$badge-name} {
+    display: inline-block;
+    padding: (map-get($config, font-size) / 4) (map-get($config, font-size) / 2);
+
+    vertical-align: middle;
+
+    font-size: map-get($config, font-size);
+
+    border-radius: map-get($config, border-radius);
+
+    @each $modifier in primary, contrast {
+      &--#{$modifier} {
+        color: map-get($config, $modifier + '-text-color');
+        background-color: map-get($config, $modifier + '-background-color');
+      }
+    }
+  }
+}
+

@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+/**
+ * 三角形
+ * @name 三角形
+ * @arg {number} $width 宽度
+ * @arg {number} $height 高度
+ * @arg {color} $color 颜色
+ * @arg {direction} $direction 方向 
+ * @example {scss} caret .demo { @include triangle(8px, 8px, red, up); }
+ *
+ */
+
+@mixin triangle($width, $height, $color, $direction) {
+  $solid-border-width: $height;
+  $transparent-border-width: $width / 2;
+  $solid-border-style: $solid-border-width solid $color;
+  $transparent-border-style: $transparent-border-width solid transparent;
+  height: 0;
+  width: 0;
+
+  @if $direction == up {
+    border-bottom: $solid-border-style;
+    border-left: $transparent-border-style;
+    border-right: $transparent-border-style;
+  } @else if $direction == right {
+    border-left: $solid-border-style;
+    border-top: $transparent-border-style;
+    border-bottom: $transparent-border-style;
+  } @else if $direction == down {
+    border-top: $solid-border-style;
+    border-left: $transparent-border-style;
+    border-right: $transparent-border-style;
+  } @else if $direction == left {
+    border-right: $solid-border-style;
+    border-top: $transparent-border-style;
+    border-bottom: $transparent-border-style;
+  } @else {
+    @error "triangle direction must be up, right, down or left, but you provide #{$direction}";
+  }
+}

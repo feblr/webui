@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+/**
+ * 颜色
+ * @name 颜色
+ * @arg {color.#00bc8d} $primary-color 主题色
+ * @arg {color.#d70c18} $contrast-color 对比色
+ * @arg {color.#999999} $secondary-color 次要色
+ * @arg {color.#333333} $background-color 背景色
+ *
+ */
+$primary-color: #00bc8d !default;
+$contrast-color: #d70c18 !default;
+$secondary-color: #999999 !default;
+$background-color: #333333 !default;
+
+
+/**
+ * @name 字体
+ * @arg {number.12px} $hint-font-size 补充说明文字大小
+ * @arg {number.14px} $normal-font-size 正文字体大小
+ * @arg {number.24px} $first-level-title-font-size 一级标题文字大小
+ * @arg {number.20px} $secondary-level-title-font-size 二级标题文字大小
+ *
+ */
+$hint-font-size: 12px !default;
+$normal-font-size: 14px !default;
+$first-level-title-font-size: 24px !default;
+$secondary-level-title-font-size: 20px !default;
+
+

@@ -1,0 +1,6 @@
+.DS_Store
+node_modules
+npm-debug.log
+{{ prompt.distDir }}
+{{ prompt.viewsDir }}
+config.toml

@@ -1,0 +1,29 @@
+{
+  "name": "feblr-view-model",
+  "version": "0.0.1",
+  "description": "view model of ui components",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "tape test/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacobChang/feblr-web.git"
+  },
+  "keywords": [
+    "component",
+    "logic"
+  ],
+  "author": "Jacob Chang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JacobChang/feblr-web/issues"
+  },
+  "homepage": "https://github.com/JacobChang/feblr-web#readme",
+  "devDependencies": {
+    "@types/tape": "^4.2.28",
+    "tape": "^4.6.2",
+    "typescript": "^2.1.4"
+  }
+}

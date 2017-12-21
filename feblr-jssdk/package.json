@@ -1,0 +1,35 @@
+{
+  "name": "feblr-jssdk",
+  "version": "0.0.1",
+  "description": "JS SDK of feblr",
+  "main": "index.js",
+  "scripts": {
+    "generator": "tsc ./tools/generator/model.ts",
+    "build": "tsc",
+    "prebuild": "node ./tools/generator/model.js",
+    "test": "npm run test"
+  },
+  "keywords": [
+    "SDK"
+  ],
+  "author": "Jacob Chang",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/angular": "^1.5.16",
+    "@types/form-data": "0.0.32",
+    "@types/request": "0.0.27",
+    "@types/vue": "^1.0.31",
+    "@types/vue-resource": "^0.9.30",
+    "form-data": "^2.1.1",
+    "tslint": "^3.15.1",
+    "typescript": "^2.1.4"
+  },
+  "dependencies": {
+    "@types/yargs": "^6.3.1",
+    "angular": "^1.5.8",
+    "jsencrypt": "^2.3.1",
+    "request": "^2.75.0",
+    "vue": "^2.0.3",
+    "vue-resource": "^1.0.3"
+  }
+}

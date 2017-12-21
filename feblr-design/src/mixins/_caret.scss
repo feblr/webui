@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+/**
+ * 脱字号
+ * @name 脱字号
+ * @arg {position} $position 定位方式
+ * @arg {number} $caret-width 宽度
+ * @arg {number} $border-width 线条宽度
+ * @arg {text} $direction 线条方向
+ * @arg {color} $border-color 边框颜色
+ * @arg {color} $background-color 背景色 
+ * @example {scss} caret .demo { @include caret(absolute, 8px, 1px, up, 1px, blue); }
+ *
+ */
+
+
+@mixin caret($position, $caret-width, $border-width, $direction, $border-color, $background-color) {
+  $caret-solid-border-style: $caret-width solid $border-color;
+  $caret-transparent-border-style: $caret-width solid transparent;
+  $mask-solid-border-style: ($caret-width - $border-width) solid $background-color;
+  $mask-transparent-border-style: ($caret-width - $border-width) solid transparent;
+  position: $position;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+  }
+
+  @if $direction == top {
+    &:before {
+      top: 0;
+      left: 0;
+      border-bottom: $caret-solid-border-style;
+      border-left: $caret-transparent-border-style;
+      border-right: $caret-transparent-border-style;
+    }
+
+    &:after {
+      left: $border-width;
+      top: $border-width;
+      border-bottom: $mask-solid-border-style;
+      border-left: $mask-transparent-border-style;
+      border-right: $mask-transparent-border-style;
+    }
+  } @else if $direction == right {
+    &:before {
+      top: 0;
+      left: 0;
+      border-left: $caret-solid-border-style;
+      border-top: $caret-transparent-border-style;
+      border-bottom: $caret-transparent-border-style;
+    }
+
+    &:after {
+      left: 0;
+      top: $border-width;
+      border-left: $mask-solid-border-style;
+      border-top: $mask-transparent-border-style;
+      border-bottom: $mask-transparent-border-style;
+    }
+  } @else if $direction == bottom {
+    &:before {
+      top: 0;
+      left: 0;
+      border-top: $caret-solid-border-style;
+      border-left: $caret-transparent-border-style;
+      border-right: $caret-transparent-border-style;
+    }
+
+    &:after {
+      left: $border-width;
+      top: 0;
+      border-top: $mask-solid-border-style;
+      border-left: $mask-transparent-border-style;
+      border-right: $mask-transparent-border-style;
+    }
+  } @else if $direction == left {
+    &:before {
+      top: 0;
+      left: 0;
+      border-right: $caret-solid-border-style;
+      border-top: $caret-transparent-border-style;
+      border-bottom: $caret-transparent-border-style;
+    }
+
+    &:after {
+      left: $border-width;
+      top: $border-width;
+      border-right: $mask-solid-border-style;
+      border-top: $mask-transparent-border-style;
+      border-bottom: $mask-transparent-border-style;
+    }
+  } @else {
+  }
+}

@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+/**
+ * 卡片
+ *
+ * @name 卡片
+ * @component {string} card 组件名
+ * @modifier {string} default 类别修饰
+ * @arg {number.1px} border-width 卡片边框宽度
+ * @arg {color.#e4e4e4} border-color 卡片边框颜色
+ * @arg {number.4px} border-radius 卡片圆角大小
+ * @arg {number.4px} box-shadow-size 卡片阴影大小
+ * @arg {color.#e4e4e4} box-shadow-color 卡片阴影颜色
+ * @arg {number.14px} shrink-padding-size 带内边距的卡片内据大小
+ * @example {html} card
+ *  <div class="card">
+ *    <div class="card__header">
+ *      <p>卡片头部</p>
+ *    </div>
+ *    <div class="card__main">
+ *      <p>卡片主体</p>
+ *    </div>
+ *    <div class="card__footer">
+ *      <p>卡片尾部</p>
+ *    </div>
+ *  </div>
+ * @example {html} card-shrink
+ *  <div class="card">
+ *    <div class="card__header card__header--shrink">
+ *      <p>卡片头部</p>
+ *    </div>
+ *    <div class="card__main card__main--shrink">
+ *      <p>卡片主体</p>
+ *    </div>
+ *    <div class="card__footer card__footer--shrink">
+ *      <p>卡片尾部</p>
+ *    </div>
+ *  </div>
+ * @usage {scss} card
+ *  card(+config, +modifier, +theme)
+ */
+
+$card-defaults: (
+  border-width: 1px,
+  border-color: #e4e4e4,
+  border-radius: 4px,
+  box-shadow-size: 4px,
+  box-shadow-color: #e4e4e4,
+  shrink-padding-size: 14px,
+);
+
+@mixin card($customization: $card-defaults, $modifier: default, $theme: "") {
+  $config: map-merge($map1: $card-defaults, $map2: $customization);
+  $card-name: component('card', $modifier, $theme);
+
+  .#{$card-name} {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: map-get($config, border-width) solid map-get($config, border-color);
+
+    border-radius: map-get($config, border-radius);
+
+    box-shadow: 0 0 map-get($config, box-shadow-size) map-get($config, box-shadow-color);
+
+    &--shrink {
+      padding: 0 map-get($config, shrink-padding-size);
+    }
+
+    &__header {
+      display: block;
+      padding: 0 map-get($config, shrink-padding-size);
+
+      border-bottom: map-get($config, border-width) solid map-get($config, border-color);
+
+      &--shrink {
+        padding: 0;
+        margin: 0 map-get($config, shrink-padding-size);
+      }
+    }
+
+    &__main {
+      display: block;
+      padding: 0 map-get($config, shrink-padding-size);
+
+      &--shrink {
+        padding: 0;
+        margin: 0 map-get($config, shrink-padding-size);
+      }
+    }
+
+    &__footer {
+      display: block;
+      padding: 0 map-get($config, shrink-padding-size);
+
+      border-top: map-get($config, border-width) solid map-get($config, border-color);
+
+      &--shrink {
+        padding: 0;
+        margin: 0 map-get($config, shrink-padding-size);
+      }
+    }
+  }
+}
+

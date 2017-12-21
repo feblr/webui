@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+/**
+ * 站点导航
+ * @name 站点导航
+ * @component {string} site-nav 组件名
+ * @modifier {string} default 类别修饰
+ * @arg {color.#e4e4e4} border-color 导航项边框颜色
+ * @arg {number.46px} height 导航项高度
+ * @arg {number.16px} horizontal-padding 导航项水平方向填充距离
+ * @arg {number.18px} normal-font-size 导航项正常字体大小
+ * @arg {color.#333333} normal-color 导航项正常字体颜色
+ * @arg {color.white} normal-background-color 导航项正常背景颜色
+ * @arg {number.18px} hover-font-size 导航项悬停字体大小
+ * @arg {color.#00bc8d} hover-color 导航项悬停时字体颜色
+ * @arg {color.white} hover-background-color 导航项悬停背景颜色
+ * @arg {number.18px} active-font-size 导航项激活字体大小
+ * @arg {color.#333333} active-color 导航项字体激活时颜色
+ * @arg {color.#e4e4e4} active-background-color 导航项激活背景颜色
+ * @example {html} site-nav
+ *  <nav class="site-nav">
+ *    <ul class="site-nav__items">
+ *      <li class="site-nav__item site-nav__item--active">site-nav 1</li>
+ *      <li class="site-nav__item">site-nav 2</li>
+ *      <li class="site-nav__item">site-nav 3</li>
+ *    </ul>
+ *  </nav>
+ * @usage {scss} site-nav
+ *  site-nav(+config, +modifier, +theme)
+ */
+
+$site-nav-defaults: (
+  item-border-color: #e4e4e4,
+  item-height: 46px,
+  item-horizontal-padding: 16px,
+  item-normal-font-size: 18px,
+  item-normal-color: #333333,
+  item-normal-background-color: white,
+  item-hover-font-size: 18px,
+  item-hover-color: #00bc8d,
+  item-hover-background-color: white,
+  item-active-font-size: 18px,
+  item-active-color: #333333,
+  item-active-background-color: #e4e4e4,
+);
+
+@mixin site-nav($customization: $site-nav-defaults, $modifier: default, $theme: "") {
+  $config: map-merge($map1: $site-nav-defaults, $map2: $customization);
+  $site-nav-name: component('site-nav', $modifier, $theme);
+
+  .#{$site-nav-name} {
+    display: table;
+    margin: 0;
+    padding: 0;
+
+    border-collapse: collapse;
+
+    &__items {
+      display: table-row;
+    }
+
+    &__item {
+      display: table-cell;
+      padding: 0 map-get($config, item-horizontal-padding);
+      border: 1px solid map-get($config, item-border-color);
+
+      &:first-child {
+        border-right: none;
+      }
+
+      color: map-get($config, item-normal-color);
+      font-size: map-get($config, item-normal-font-size);
+      line-height: map-get($config, item-height);
+
+      cursor: pointer;
+
+      vertical-align: bottom;
+
+      height: map-get($config, item-height);
+
+      background-color: map-get($config, item-normal-background-color);
+
+      &:hover {
+        color: map-get($config, item-hover-color);
+        font-size: map-get($config, item-hover-font-size);
+
+        background-color: map-get($config, item-hover-background-color);
+      }
+
+      &--active {
+        color: map-get($config, item-active-color);
+        font-size: map-get($config, item-active-font-size);
+
+        background-color: map-get($config, item-active-background-color);
+
+        &:hover {
+          color: map-get($config, item-active-color);
+
+          background-color: map-get($config, item-active-background-color);
+        }
+      }
+    }
+  }
+}
